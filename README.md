@@ -1,0 +1,2 @@
+# What is this?
+This project is a small webserver built with only the use of the "net" package in Golang. I wanted to learn more about the HTTP protocol and Golang. What better way than implementing the protocol myself using Go!? 

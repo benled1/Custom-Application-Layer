@@ -5,8 +5,6 @@ import (
 	"net"
 )
 
-// take a look at this article: https://okanexe.medium.com/the-complete-guide-to-tcp-ip-connections-in-golang-1216dae27b5a
-
 func handleConnection(conn net.Conn) {
 	var msg string = "hello from the server"
 	_, err := conn.Write([]byte(msg))
