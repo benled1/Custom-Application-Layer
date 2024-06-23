@@ -1,2 +1,8 @@
 # What is this?
-This project is a small webserver built with only the use of the "net" package in Golang. I wanted to learn more about the HTTP protocol and Golang. What better way than implementing the protocol myself using Go!? 
+This project is for the purpose of learning the different application layer protocols.
+Some of the protocols I will be implementing are:
+- HTTP 
+- FTP 
+- SSH
+
+Some more may be added in the future, but for now these protocols are the goal.
