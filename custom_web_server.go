@@ -2,15 +2,35 @@ package main
 
 import (
 	"fmt"
-	"net/http"
+	"net"
 )
 
-func testHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "this is a test...")
+// take a look at this article: https://okanexe.medium.com/the-complete-guide-to-tcp-ip-connections-in-golang-1216dae27b5a
+
+func handleConnection(conn net.Conn) {
+	var msg string = "hello from the server"
+	_, err := conn.Write([]byte(msg))
+	if err != nil {
+		fmt.Println("Error while writing to connection...")
+		return
+	}
 }
 
 func main() {
-	http.HandleFunc("/test", testHandler)
 	fmt.Println("Server listening on port 8080...")
-	http.ListenAndServe(":8080", nil)
+	listener, err := net.Listen("tcp", "127.0.0.1:8080")
+	if err != nil {
+		fmt.Println("Error on listener")
+		return
+	}
+	defer listener.Close()
+	for {
+		conn, err := listener.Accept()
+		if err != nil {
+			fmt.Println("Error in message from client")
+			continue
+		}
+		go handleConnection(conn)
+	}
+
 }
