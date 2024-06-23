@@ -6,7 +6,7 @@ import (
 )
 
 func handleConnection(conn net.Conn) {
-	var msg string = "hello from the server"
+	var msg string = "HTTP/1.1 200 OK\nContent-Length: 13\n\nHello, world!"
 	_, err := conn.Write([]byte(msg))
 	if err != nil {
 		fmt.Println("Error while writing to connection...")
