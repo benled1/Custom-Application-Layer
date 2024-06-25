@@ -7,7 +7,7 @@ import (
 )
 
 type TCPServer struct {
-	ApplicationServer (http.HTTPServer)
+	ApplicationServer string
 }
 
 func (s TCPServer) Start() {
@@ -26,6 +26,8 @@ func (s TCPServer) Start() {
 			continue
 		}
 
-		go s.ApplicationServer.HandleRequest((conn))
+		if s.ApplicationServer == "http" {
+			http.HandleRequest(conn)
+		}
 	}
 }
