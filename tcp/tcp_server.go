@@ -10,7 +10,7 @@ type TCPServer struct {
 	ApplicationServer http.HTTPServer
 }
 
-func (s TCPServer) Start() {
+func (s *TCPServer) Start() {
 
 	fmt.Println("Server listening on port 8080...")
 	listener, err := net.Listen("tcp", "127.0.0.1:8080")
