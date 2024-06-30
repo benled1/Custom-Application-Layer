@@ -1,24 +1,29 @@
 package http
 
 import (
+	"custom-webserver/http/utils"
 	"fmt"
 	"net"
 )
 
-func HandleRequest(conn net.Conn) {
-	var buff []byte = make([]byte, 1024)
-	n, readErr := conn.Read(buff)
-	if readErr != nil {
-		fmt.Println("Error while reading from connection ", readErr)
-		return
-	}
-	var recvedData string = string(buff[:n])
-	fmt.Println(recvedData)
+type HTTPServer struct {
+}
 
-	var msg string = "HTTP/1.1 200 OK\nContent-Length: 13\n\nHello, world!"
-	_, writeErr := conn.Write([]byte(msg))
-	if writeErr != nil {
-		fmt.Println("Error while writing to connection...")
-		return
+func (s HTTPServer) HandleRequest(conn net.Conn) error {
+	newHttpRequest, err := utils.NewHTTPRequest(conn)
+	if err != nil {
+		return fmt.Errorf("error while creating a new HTTPRequest: %w", err)
 	}
+	fmt.Println(newHttpRequest)
+	return nil
+	// var msg string = "HTTP/1.1 200 OK\nContent-Length: 13\n\nHello, world!"
+	// _, writeErr := conn.Write([]byte(msg))
+	// if writeErr != nil {
+	// 	fmt.Println("Error while writing to connection...")
+	// 	return nil
+	// }
+}
+
+func (s HTTPServer) addHeaders() {
+
 }

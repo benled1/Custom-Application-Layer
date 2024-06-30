@@ -1,13 +1,13 @@
 package tcp
 
 import (
-	"custom-application-layer/http"
+	"custom-webserver/http"
 	"fmt"
 	"net"
 )
 
 type TCPServer struct {
-	ApplicationServer string
+	ApplicationServer http.HTTPServer
 }
 
 func (s TCPServer) Start() {
@@ -22,12 +22,9 @@ func (s TCPServer) Start() {
 	for {
 		conn, err := listener.Accept()
 		if err != nil {
-			fmt.Println("Error in message from client")
+			fmt.Println("Error in TCP connection.")
 			continue
 		}
-
-		if s.ApplicationServer == "http" {
-			http.HandleRequest(conn)
-		}
+		go s.ApplicationServer.HandleRequest(conn)
 	}
 }

@@ -1,3 +1,3 @@
-module custom-application-layer
+module custom-webserver
 
 go 1.22.3
